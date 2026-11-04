@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Uma surpresa para você ❤️</title>
+
+    <!-- CSS: aparência do site -->
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #c90018;
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Coração principal */
+
+        .coracao {
+            position: relative;
+            display: inline-block;
+            font-size: 180px;
+            color: white;
+            cursor: pointer;
+            filter: drop-shadow(0 0 15px #ffb6c1);
+            transition: transform 0.3s;
+            user-select: none;
+        }
+
+        .coracao:hover {
+            transform: scale(1.08);
+        }
+
+        .texto-coracao {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #c90018;
+            font-size: 23px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        /* Animação do coração */
+
+        .pular {
+            animation: pular 0.7s ease;
+        }
+
+        @keyframes pular {
+
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            30% {
+                transform: translateY(-60px) scale(1.15);
+            }
+
+            60% {
+                transform: translateY(0) scale(0.95);
+            }
+        }
+
+        /* Mensagem */
+
+        #mensagem {
+            color: white;
+            font-size: 42px;
+            font-weight: bold;
+            margin-top: 20px;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.6s ease;
+        }
+
+        #mensagem.aparecer {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Corações flutuantes */
+
+        .coracao-flutuante {
+            position: fixed;
+            bottom: -50px;
+            color: white;
+            pointer-events: none;
+            animation: subir linear forwards;
+            z-index: 1;
+        }
+
+        @keyframes subir {
+
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Coração clicável -->
+
+        <div class="coracao" id="coracao">
+
+            ♥ 
+
+            <span class="texto-coracao">
+                clique aqui
+            </span>
+
+        </div>
+
+        <!-- Mensagem escondida -->
+
+        <div id="mensagem">
+            eu te amo ❤️
+        </div>
+
+    </div>
+
+
+    <!-- JavaScript: funcionalidades -->
+
+    <script>
+
+        const coracao = document.getElementById("coracao");
+
+        const mensagem = document.getElementById("mensagem");
+
+
+        coracao.addEventListener("click", function() {
+
+            // Faz o coração pular
+
+            coracao.classList.remove("pular");
+
+            void coracao.offsetWidth;
+
+            coracao.classList.add("pular");
+
+
+            // Mostra a mensagem
+
+            mensagem.classList.add("aparecer");
+
+
+            // Cria 30 corações
+
+            for (let i = 0; i < 30; i++) {
+
+                const novoCoracao = document.createElement("div");
+
+                novoCoracao.classList.add("coracao-flutuante");
+
+                novoCoracao.innerHTML = "♥";
+
+                novoCoracao.style.left =
+                    Math.random() * 100 + "vw";
+
+                novoCoracao.style.fontSize =
+                    (15 + Math.random() * 35) + "px";
+
+                novoCoracao.style.animationDuration =
+                    (2 + Math.random() * 3) + "s";
+
+                document.body.appendChild(novoCoracao);
+
+
+                // Remove após a animação
+
+                setTimeout(function() {
+
+                    novoCoracao.remove();
+
+                }, 5000);
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
